@@ -1,0 +1,24 @@
+{
+  "name": "rpi-redditbutton",
+  "version": "0.1.0",
+  "description": "Changes the color of a LED based on the reddit button",
+  "main": "button.js",
+  "dependencies": {
+    "xmlhttprequest": "^1.7.0",
+    "websocket": "^1.0.18",
+    "pi-blaster.js": "^0.0.2"
+  },
+  "keywords": [
+    "thebutton",
+    "raspberrypi"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node button.js"
+  },
+  "author": "Spencer Owen <owenspencer@gmail.com>",
+  "license": "ISC"
+}
