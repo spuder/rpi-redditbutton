@@ -6,21 +6,35 @@ var piblaster = require("pi-blaster.js");
 
 // RGB values taken from the flair CSS settings.  I had to tweak blue since the Hue does a bad
 // job with light blue colours.
+
+var red_pin = 17
+var green_pin = 22
+var blue_pin = 23
+piblaster.setPwm(red_pin, 0);
+piblaster.setPwm(green_pin, 0);
+piblaster.setPwm(blue_pin, 0);
+
 function rgbFromSecondsRemaining(seconds)
 {
     var i = parseInt(seconds);
 
     if (i > 51)
+        // Dark Blue
         return [130, 0, 128];
     else if (i > 41)
+        // Purple #0032C7
         return [0, 50, 199];
     else if (i > 31)
+        // Green #02BE01
         return [2, 190, 1];
     else if (i > 21)
+        // Yellow #E5D90A
         return [229, 217, 0];
     else if (i > 11)
+        // Orange #E59500
         return [229, 149, 0];
     else
+        // Red #E50000
         return [229, 0, 0];
 }
 
@@ -32,28 +46,12 @@ function setLights(timeRemaining)
     var red = rgb[0]
     var green = rgb[1]
     var blue = rgb[2]
-    // console.log(util.format("setColor: %d %d %d", red, green, blue));
-    piblaster.setPwm(1, red);
-    piblaster.setPwm(2, green);
-    piblaster.setPwm(4, blue);
+    console.log("setColor:" + red + "," + green + "," + blue);
 
+    piblaster.setPwm(red_pin, red/255 );
+    piblaster.setPwm(green_pin, green/255 );
+    piblaster.setPwm(blue_pin, blue/255 );
 
-    // Enable the led if we have a value > 0
-    if (red > 0 || green > 0 || blue > 0) {
-      piblaster.setPwm(0, 1);
-    }
-    // Otherwise disable it
-    else {
-      piblaster.setPwm(0, 0);
-        }
-    // api.lights(function(err, lights) {
-    //     if (err) throw err;
-        
-    //     for (var i = 0; i < lights.lights.length; i++)
-    //     {
-    //         api.setLightState(lights.lights[i].id, state.on().rgb(rgb)).done();
-    //     }
-    // });
 }
 
 
@@ -96,7 +94,7 @@ var Comms = (function() {
         // if (HueInitialized)
         // {
             console.log(packet.payload.seconds_left + "s");
-            // setLights(packet.payload.seconds_left);
+            setLights(packet.payload.seconds_left);
         // }
     }
 
