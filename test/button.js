@@ -4,12 +4,6 @@ var WebSocketClient = require('websocket').client;
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var piblaster = require("pi-blaster.js");
 
-console.log("Hello, I'm lindsay lohan")
-
-
-
-
-
 // RGB values taken from the flair CSS settings.  I had to tweak blue since the Hue does a bad
 // job with light blue colours.
 function rgbFromSecondsRemaining(seconds)
